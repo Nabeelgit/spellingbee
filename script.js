@@ -188,3 +188,33 @@ function speakText(text) {
         alert('Text-to-speech not supported in this browser.');
     }
 }
+
+document.addEventListener("keydown", function(e){
+    if(e.key !== "Enter") return;
+
+    if(!modal_overlay.classList.contains("hidden")){
+        e.preventDefault();
+        next_word_btn.click();
+        return;
+    }
+
+    if(!fallback_next_btn.classList.contains("hidden")){
+        e.preventDefault();
+        fallback_next_btn.click();
+        return;
+    }
+
+    if(document.activeElement === spell_input){
+        e.preventDefault();
+        enter_btn.click();
+    }
+});
+
+document.addEventListener("keydown", function(e){
+    if(e.key !== "/") return;
+    if(document.activeElement === spell_input) return;
+    if(game_screen.classList.contains("hidden")) return;
+
+    e.preventDefault();
+    spell_input.focus();
+});

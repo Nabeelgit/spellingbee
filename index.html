@@ -10,15 +10,22 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="container">
+    <div id="intro-screen" class="screen">
+        <h1 class="main-header">Spelling bee!</h1>
+        <p class="instructions">The word will be spoken aloud and you will have to type your guess of the spelling of that word into the input box.</p>
+        <button id="start-btn">Start</button>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
         <h1 class="main-header">Spelling bee!</h1>
         <input id="spell-input" type="text" placeholder="Spell here..." autocomplete="off">
         <div class="button-container">
+            <button id="speak-again-btn">Say the word!</button>
             <button id="enter-btn">Enter</button>
-            <button id="speak-again-btn">Again</button>
         </div>
         <h3 id="word-definition"></h3>
     </div>
+
     <script src="./script.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ async function getRandomWord(){
     let defData = "No definition available";
     if(defRes.ok){
         defData = await defRes.json();
-        defData = defData[0].meanings[0].definitions[0].definition;
+        defData = defData[0]?.meanings?.[0]?.definitions?.[0]?.definition ?? "No definition available";
     }
 
     wordArr.push(defData);
@@ -18,25 +18,34 @@ async function getRandomWord(){
     return wordArr;
 }
 
+const intro_screen = document.getElementById("intro-screen");
+const game_screen = document.getElementById("game-screen");
+const start_btn = document.getElementById("start-btn");
+
 const spell_input = document.getElementById("spell-input");
 const enter_btn = document.getElementById("enter-btn");
 const speak_again_btn = document.getElementById("speak-again-btn");
 const definition_p = document.getElementById("word-definition");
 
 let current_word = "";
-let current_definiton = "";
+let current_definition = "";
 
 function handleWord(words){
     current_word = words[0];
-    console.log(current_word);
-    current_definiton = words[1];
+    current_definition = words[1];
 
     const prefixes = ["Please spell", "Spell", "Try spelling"];
-    let random_prefix = prefixes[Math.floor(Math.random() * (Math.floor(prefixes.length) - Math.ceil(0)))]
-    speakText(`${random_prefix} ${current_word}`)
+    const random_prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    speakText(`${random_prefix} ${current_word}`);
 
-    definition_p.innerText = current_definiton;
+    definition_p.innerText = current_definition;
 }
+
+start_btn.addEventListener("click", function(){
+    intro_screen.classList.add("hidden");
+    game_screen.classList.remove("hidden");
+    getRandomWord().then(handleWord);
+})
 
 enter_btn.addEventListener("click", function(){
     let user_inp = spell_input.value.trim();
@@ -58,21 +67,12 @@ speak_again_btn.addEventListener("click", function(){
 })
 
 function speakText(text) {
-    // Check if the browser supports the API
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        
-        //utterance.volume = 1; // From 0 to 1
-        utterance.rate = 0.3;   // From 0.1 to 10
-        utterance.pitch = 2;  // From 0 to 2
-        
-        // const voices = window.speechSynthesis.getVoices();
-        // utterance.voice = voices[1];
-
+        utterance.rate = 0.3;
+        utterance.pitch = 2;
         window.speechSynthesis.speak(utterance);
     } else {
         alert('Text-to-speech not supported in this browser.');
     }
 }
-
-getRandomWord().then(handleWord);

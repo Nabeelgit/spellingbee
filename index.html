@@ -23,8 +23,26 @@
             <button id="speak-again-btn">Say the word!</button>
             <button id="enter-btn">Enter</button>
         </div>
+        <button id="fallback-next-btn" class="fallback-next-btn hidden">Next word</button>
         <h3 id="word-definition"></h3>
     </div>
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="modal" class="modal">
+            <button id="modal-close-btn" class="modal-close" aria-label="Close">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <line x1="4" y1="4" x2="20" y2="20"></line>
+                    <line x1="20" y1="4" x2="4" y2="20"></line>
+                </svg>
+            </button>
+            <div id="modal-body" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="next-word-btn" class="next-word-btn">Next word</button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="confetti-canvas"></canvas>
 
     <script src="./script.js"></script>
 </body>

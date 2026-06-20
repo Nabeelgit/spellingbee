@@ -59,3 +59,111 @@ body {
 #word-definition {
     max-width: 40rem;
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal {
+    position: relative;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 90%;
+    max-width: 28rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 4px solid transparent;
+    box-sizing: border-box;
+}
+
+.modal.correct {
+    border-color: #2e8b3d;
+}
+
+.modal.incorrect {
+    border-color: #c0392b;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.25rem;
+    display: flex;
+}
+
+.modal-body {
+    text-align: center;
+    font-size: large;
+    line-height: 1.5;
+}
+
+.modal-body .definition {
+    margin-top: 0.5rem;
+    font-size: medium;
+    color: #444;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+.next-word-btn {
+    background-color: #2e8b3d;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    font-size: medium;
+    font-family: "Ubuntu Mono", monospace;
+    cursor: pointer;
+}
+
+.next-word-btn:hover {
+    background-color: #256e31;
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.fallback-next-btn {
+    margin-top: 1rem;
+    background-color: #2e8b3d;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    font-size: medium;
+    font-family: "Ubuntu Mono", monospace;
+    cursor: pointer;
+}
+
+.fallback-next-btn:hover {
+    background-color: #256e31;
+}

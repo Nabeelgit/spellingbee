@@ -178,41 +178,10 @@ window.addEventListener("resize", function(){
     confetti_canvas.height = window.innerHeight;
 });
 
-async function speakText(text) {
-    try {
-        const res = await fetch('https://freetts.org/api/tts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                text: text,
-                voice: 'en-US-JennyNeural',
-                rate: '-20%',
-                pitch: '+0Hz'
-            })
-        });
-
-        if(!res.ok) throw new Error("TTS request failed");
-
-        const { file_id } = await res.json();
-        const audioRes = await fetch(`https://freetts.org/api/audio/${file_id}`);
-        const blob = await audioRes.blob();
-        const url = URL.createObjectURL(blob);
-
-        const audio = new Audio(url);
-        audio.addEventListener("ended", function(){
-            URL.revokeObjectURL(url);
-        });
-        audio.play();
-    } catch (err) {
-        console.log("FreeTTS failed, falling back to browser speech:", err);
-        speakTextFallback(text);
-    }
-}
-
-function speakTextFallback(text) {
+function speakText(text) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.3;
+        utterance.rate = 0.5;
         utterance.pitch = 2;
         window.speechSynthesis.speak(utterance);
     } else {

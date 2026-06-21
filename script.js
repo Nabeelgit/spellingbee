@@ -192,6 +192,12 @@ function speakText(text) {
 document.addEventListener("keydown", function(e){
     if(e.key !== "Enter") return;
 
+    if(!intro_screen.classList.contains("hidden")){
+        e.preventDefault();
+        start_btn.click();
+        return;
+    }
+
     if(!modal_overlay.classList.contains("hidden")){
         e.preventDefault();
         next_word_btn.click();

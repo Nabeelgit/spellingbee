@@ -218,3 +218,14 @@ document.addEventListener("keydown", function(e){
     e.preventDefault();
     spell_input.focus();
 });
+
+document.addEventListener("keydown", function(e){
+    if(e.code !== "Space") return;
+    if(document.activeElement === spell_input) return;
+    if(document.activeElement && document.activeElement.tagName === "BUTTON") return;
+    if(game_screen.classList.contains("hidden")) return;
+    if(!modal_overlay.classList.contains("hidden")) return;
+
+    e.preventDefault();
+    speak_again_btn.click();
+});
